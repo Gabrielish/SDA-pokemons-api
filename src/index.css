@@ -16,6 +16,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   background-image: linear-gradient(to top left, #f9d976 0%, #f39f86 100%);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #eee;
   
 }

@@ -36,12 +36,24 @@ const Pokemons = () => {
     })
   }
 
+  const onSet = () => {
+   
+  }
+
   return (
     <div>
+        {/* SETERS */}
+      {/* <div className="seters">
+        <input ref={offset} value={set} type="text" placeholder="Offset"></input>
+        <input type="text" placeholder="Limit"></input>
+        <button className="set" onClick={onSet}>Submit</button>
+      </div> */}
+        {/* NEXT/PREVIOUS BUTTONS */}
       <div className='buttons'>
         {previous !== null && <button onClick={onPrevious}>Previous</button>}
         {next !== null && <button onClick={onNext}>Next</button>}
       </div>
+      
       <div className='pokemon-list'>
         {pokemons.length === 0 && <p>Datele se incarca...</p>}
         {pokemons.length !== 0 &&
