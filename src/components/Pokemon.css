@@ -25,7 +25,7 @@
     box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
 }
 
-.buttons button:active, .set {
+.set:active {
     transform: translateY(2px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }

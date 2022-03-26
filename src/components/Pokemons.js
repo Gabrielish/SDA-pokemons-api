@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { fetchPokemonsList } from "./connectors"
+import { fetchPokemonsList, fetchPokemonsListWithOffsetAndLimit } from "./connectors"
 
 import Pokemon from "./Pokemon"
 import "./Pokemon.css"
@@ -8,6 +8,9 @@ const Pokemons = () => {
   const [next, setNext] = useState(null)
   const [previous, setPrevious] = useState(null)
   const [pokemons, setPokemons] = useState([])
+  const [offsetVal, setOffset] = useState(0)
+  const [limitVal, setLimit] = useState(20)
+  
 
   useEffect(() => {
     fetchPokemonsList().then(data => {
@@ -36,18 +39,49 @@ const Pokemons = () => {
     })
   }
 
-  const onSet = () => {
-   
+  const onChangeValue = () => {
+    fetchPokemonsListWithOffsetAndLimit(offsetVal, limitVal).then(data => {
+      setNext(data.next)
+      setPrevious(data.previous)
+      setPokemons(data.results)
+      console.log(data)
+    })
+}
+  const onOffSetChange = (event) => {
+    console.log(event.target.value)
+    const newOffsetValue = parseInt(event.target.value)
+    setOffset(newOffsetValue || 0)
+
   }
 
+  const onLimitChange = (event) => {
+    console.log(event.target)
+    const newLimitValue = parseInt(event.target.value)
+    setLimit(newLimitValue || 0)
+  }
+
+
   return (
+    
     <div>
+
+
+
         {/* SETERS */}
-      {/* <div className="seters">
-        <input ref={offset} value={set} type="text" placeholder="Offset"></input>
-        <input type="text" placeholder="Limit"></input>
-        <button className="set" onClick={onSet}>Submit</button>
-      </div> */}
+      <div className="seters">
+        <div>
+          <label>Offset: </label>
+          <input type="text" placeholder="Offset" value={offsetVal} onChange={onOffSetChange}></input>
+        </div>
+        <div>
+          <labe>Limit: </labe>
+          <input type="text" placeholder="Limit" value={limitVal} onChange={onLimitChange}></input>
+        </div>
+        <button className="set" onClick={onChangeValue}>Submit</button>
+      </div>
+
+
+
         {/* NEXT/PREVIOUS BUTTONS */}
       <div className='buttons'>
         {previous !== null && <button onClick={onPrevious}>Previous</button>}
